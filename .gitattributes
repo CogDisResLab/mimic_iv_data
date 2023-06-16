@@ -1,2 +1,6 @@
 *.gitignore filter=lfs diff=lfs merge=lfs -text
 *.Rproj filter=lfs diff=lfs merge=lfs -text
+*.Rprofile filter=lfs diff=lfs merge=lfs -text
+*.lock filter=lfs diff=lfs merge=lfs -text
+*.R filter=lfs diff=lfs merge=lfs -text
+*.json filter=lfs diff=lfs merge=lfs -text
