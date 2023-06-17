@@ -1,5 +1,6 @@
 *.csv filter=lfs diff=lfs merge=lfs -text
 *.sqlite filter=lfs diff=lfs merge=lfs -text
+*.RDS filter=lfs diff=lfs merge=lfs -text
 *.gitignore filter=lfs diff=lfs merge=lfs -text
 *.Rproj filter=lfs diff=lfs merge=lfs -text
 *.Rprofile filter=lfs diff=lfs merge=lfs -text
