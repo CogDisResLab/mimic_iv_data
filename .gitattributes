@@ -8,3 +8,9 @@
 *.json filter=lfs diff=lfs merge=lfs -text
 *.sql filter=lfs diff=lfs merge=lfs -text
 *.txt filter=lfs diff=lfs merge=lfs -text
+/ancillary/icd_codes/anxiety filter=lfs diff=lfs merge=lfs -text
+/ancillary/icd_codes/bipolar filter=lfs diff=lfs merge=lfs -text
+/ancillary/icd_codes/depression filter=lfs diff=lfs merge=lfs -text
+/ancillary/icd_codes/regional_enteritis filter=lfs diff=lfs merge=lfs -text
+/ancillary/icd_codes/schizophrenia filter=lfs diff=lfs merge=lfs -text
+/ancillary/icd_codes/suicide filter=lfs diff=lfs merge=lfs -text
