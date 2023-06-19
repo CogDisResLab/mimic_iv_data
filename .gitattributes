@@ -21,3 +21,4 @@
 /data/regional_enteritis/patients_regional_enteritis filter=lfs diff=lfs merge=lfs -text
 /data/schizophrenia/patients_schizophrenia filter=lfs diff=lfs merge=lfs -text
 /data/suicide/patients_suicide filter=lfs diff=lfs merge=lfs -text
+/results/labtest_props_across_diseases filter=lfs diff=lfs merge=lfs -text
