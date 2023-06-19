@@ -15,3 +15,9 @@
 /ancillary/icd_codes/regional_enteritis filter=lfs diff=lfs merge=lfs -text
 /ancillary/icd_codes/schizophrenia filter=lfs diff=lfs merge=lfs -text
 /ancillary/icd_codes/suicide filter=lfs diff=lfs merge=lfs -text
+/data/anxiety/patients_anxiety filter=lfs diff=lfs merge=lfs -text
+/data/bipolar/patients_bipolar filter=lfs diff=lfs merge=lfs -text
+/data/depression/patients_depression filter=lfs diff=lfs merge=lfs -text
+/data/regional_enteritis/patients_regional_enteritis filter=lfs diff=lfs merge=lfs -text
+/data/schizophrenia/patients_schizophrenia filter=lfs diff=lfs merge=lfs -text
+/data/suicide/patients_suicide filter=lfs diff=lfs merge=lfs -text
