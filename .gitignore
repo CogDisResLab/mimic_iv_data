@@ -1,3 +1,6 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:866dcd483e2fff1f0e41ed002ab9a8b5b0a8b693e131eac49889ee2b259fcb4e
-size 50
+.Rproj.user
+.Rhistory
+.RData
+.Ruserdata
+*.sqlite
+

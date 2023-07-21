@@ -1,3 +1,42 @@
-version https://git-lfs.github.com/spec/v1
-oid sha256:85728b9f5df7a6a4200a44a2d5ba396a0e60e1a83de6ad1f1643c610518ae918
-size 1117
+# Calculate Summary Statistics
+
+library(tidyverse)
+
+extract_lab_values <- function(disease, labevents_data, labtest_list) {
+
+  in_dir <- file.path("data", disease)
+
+  out_dir <- in_dir
+
+  patient_list <-
+    read_csv(file.path(in_dir, str_glue("matched_patients_{disease}.csv")))
+
+  filtered_labevents <- labevents_data |>
+    inner_join(patient_list, by = "subject_id") |>
+    inner_join(labtest_list, by = "itemid") |>
+    mutate(label = str_c(label, fluid, sep = " | ")) |>
+    select(subject_id,
+           gender,
+           disease,
+           itemid,
+           label,
+           value,
+           valuenum,
+           valueuom,
+           charttime) |>
+    filter(!is.na(value) & !is.na(valuenum)) |>
+    write_csv(file = file.path(
+      out_dir,
+      str_glue("matched_labvalues_selected_{disease}.csv")
+    ))
+}
+
+labevents_data <- read_csv("data/labtest_information.csv")
+labtest_list <- read_csv("data/lab_test_ids.csv")
+
+diseases <- list.files("ancillary/icd_codes/") |>
+  keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
+
+
+diseases |>
+  walk(~ extract_lab_values(.x, labevents_data, labtest_list))
