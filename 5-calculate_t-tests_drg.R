@@ -2,6 +2,7 @@
 
 library(tidyverse)
 library(broom)
+library(lsr)
 
 count_patients <- function(data, disease_status) {
   n <- data |> count(disease) |> filter(disease == disease_status) |> pull(n)
