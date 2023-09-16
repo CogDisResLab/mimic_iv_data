@@ -32,6 +32,7 @@ process_disease_data <- function(disease,
     mutate(disease = 1)
 
   matchable_patients <- patients_data |>
+    filter(!subject_id %in% filtered_patients$subject_id) |>
     inner_join(diagnoses_data, by = c("subject_id")) |>
     group_by(subject_id) |>
     mutate(keep = if_else(any(drg_code %in% excluded_drgs), FALSE, TRUE)) |>
