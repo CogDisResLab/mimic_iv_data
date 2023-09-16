@@ -39,7 +39,7 @@ v_detect_fluids <- Vectorize(detect_fluids)
 
 v_remove_fluids <- Vectorize(remove_fluid)
 
-lab_items_data <- read_csv("raw/data/hosp/d_labitems.csv") |>
+lab_items_data <- read_csv("raw/data/hosp/d_labitems.csv.gz") |>
   mutate(clean_label = if_else(v_detect_fluids(label), v_remove_fluids(label), label)) |>
   filter(clean_label %in% selected_lab_items, fluid %in% c("Blood", "Urine")) |>
   select(-category, -label, itemid, label = clean_label, fluid) |>
