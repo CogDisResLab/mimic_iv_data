@@ -40,6 +40,7 @@ patients_data <- read_csv("raw/data/hosp/patients.csv.gz") |>
 labs_data <- read_csv("raw/data/hosp/labevents.csv.gz") |>
   select(subject_id, hadm_id, itemid, value, valuenum, valueuom, charttime) |>
   filter(subject_id %in% admissions_data$subject_id,
-         hadm_id %in% admissions_data$hadm_id) |>
+         hadm_id %in% admissions_data$hadm_id,
+         {!is.na(value) & !is.na(valuenum)}) |>
   filter(charttime == max(charttime), .by = c(subject_id, itemid)) |>
   write_csv("data/labtest_information.csv")
