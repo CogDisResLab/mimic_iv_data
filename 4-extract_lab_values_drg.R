@@ -53,4 +53,4 @@ diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
 diseases |>
-  walk(~ extract_lab_values(.x, labevents_data, admission_data, labtest_list, drg_clusters))
+  map(~ extract_lab_values(.x, labevents_data, admission_data, labtest_list, drg_clusters))
