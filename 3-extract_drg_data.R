@@ -7,7 +7,7 @@ extract_drgs <- function(disease) {
 
   out_dir <- in_dir
 
-  drg_data <- read_csv("raw/data/hosp/drgcodes.csv") |>
+  drg_data <- read_csv("raw/data/hosp/drgcodes.csv.gz") |>
     select(-drg_severity, -drg_mortality) |>
     filter(drg_type == "HCFA")
 
