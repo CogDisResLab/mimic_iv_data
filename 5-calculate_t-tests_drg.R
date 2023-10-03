@@ -91,5 +91,10 @@ calculate_statistics <- function(disease) {
 diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
-diseases |>
-  walk(calculate_statistics)
+calculate_statistics(diseases[1])
+calculate_statistics(diseases[2])
+calculate_statistics(diseases[3])
+calculate_statistics(diseases[4])
+calculate_statistics(diseases[5])
+calculate_statistics(diseases[6])
+calculate_statistics(diseases[7])
