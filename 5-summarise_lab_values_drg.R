@@ -37,5 +37,10 @@ summarise_values <- function(disease) {
 diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
-diseases |>
-  walk(summarise_values)
+summarise_values(diseases[1])
+summarise_values(diseases[2])
+summarise_values(diseases[3])
+summarise_values(diseases[4])
+summarise_values(diseases[5])
+summarise_values(diseases[6])
+summarise_values(diseases[7])
