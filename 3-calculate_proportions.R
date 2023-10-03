@@ -72,6 +72,7 @@ calculate_proportion_data <-
       ) |>
       inner_join(lab_items, by = "itemid") |>
       select(itemid,
+             disease,
              -label,
              -fluid,
              label = clean_labels,
@@ -123,5 +124,10 @@ labevent_data <- read_csv("data/labtest_information.csv")
 diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
-diseases |>
-  walk(~ calculate_proportion_data(.x, labevent_data))
+calculate_proportion_data(diseases[1], labevent_data)
+calculate_proportion_data(diseases[2], labevent_data)
+calculate_proportion_data(diseases[3], labevent_data)
+calculate_proportion_data(diseases[4], labevent_data)
+calculate_proportion_data(diseases[5], labevent_data)
+calculate_proportion_data(diseases[6], labevent_data)
+calculate_proportion_data(diseases[7], labevent_data)
