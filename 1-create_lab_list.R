@@ -39,8 +39,13 @@ v_detect_fluids <- Vectorize(detect_fluids)
 
 v_remove_fluids <- Vectorize(remove_fluid)
 
+labitems_units_data <- read_csv("data/labtest_information.csv") |>
+  select(itemid, valueuom) |> 
+  unique()
+
 lab_items_data <- read_csv("raw/data/hosp/d_labitems.csv.gz") |>
   mutate(clean_label = if_else(v_detect_fluids(label), v_remove_fluids(label), label)) |>
   filter(clean_label %in% selected_lab_items, fluid %in% c("Blood", "Urine")) |>
-  select(-category, -label, itemid, label = clean_label, fluid) |>
+  left_join(labitems_units_data, by = "itemid") |>
+  select(-category, -label, itemid, label = clean_label, fluid, valueuom) |>
   write_csv("data/lab_test_ids.csv")
