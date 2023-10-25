@@ -14,9 +14,10 @@ extract_lab_values <- function(disease, labevents_data, admission_data, labtest_
     inner_join(drg_clusters, by = "drg_code")
 
   filtered_labevents <- labevents_data |>
+    select(-valueuom) |>
     inner_join(patient_list, by = "subject_id") |>
     inner_join(labtest_list, by = "itemid") |>
-    mutate(label = str_c(label, fluid, sep = " | ")) |>
+    mutate(label = str_c(label, fluid, valueuom, sep = " | ")) |>
     select(subject_id,
            gender,
            disease,
@@ -52,5 +53,10 @@ drg_clusters <- list.files("ancillary/drg_codes/", full.names = TRUE) |>
 diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
-diseases |>
-  map(~ extract_lab_values(.x, labevents_data, admission_data, labtest_list, drg_clusters))
+extract_lab_values(diseases[1], labevents_data, admission_data, labtest_list, drg_clusters)
+extract_lab_values(diseases[2], labevents_data, admission_data, labtest_list, drg_clusters)
+extract_lab_values(diseases[3], labevents_data, admission_data, labtest_list, drg_clusters)
+extract_lab_values(diseases[4], labevents_data, admission_data, labtest_list, drg_clusters)
+extract_lab_values(diseases[5], labevents_data, admission_data, labtest_list, drg_clusters)
+extract_lab_values(diseases[6], labevents_data, admission_data, labtest_list, drg_clusters)
+extract_lab_values(diseases[7], labevents_data, admission_data, labtest_list, drg_clusters)
