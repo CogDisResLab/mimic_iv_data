@@ -21,5 +21,12 @@ extract_drgs <- function(disease) {
 diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
-diseases |>
-  walk(~ extract_drgs(.x))
+
+extract_drgs(diseases[1])
+extract_drgs(diseases[2])
+extract_drgs(diseases[3])
+extract_drgs(diseases[4])
+extract_drgs(diseases[5])
+extract_drgs(diseases[6])
+extract_drgs(diseases[7])
+
