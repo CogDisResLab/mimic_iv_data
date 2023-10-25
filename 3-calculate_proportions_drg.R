@@ -36,7 +36,7 @@ calculate_proportion_data <-
 
     # Load the Lab Item Code to Name mapping
     lab_items <- read_csv("data/lab_test_ids.csv") |>
-      mutate(clean_labels = str_c(label, fluid, sep = " | "))
+      mutate(clean_labels = str_c(label, fluid, valueuom, sep = " | "))
 
     # Create the subject to admission to drg_cluster mapping
 
