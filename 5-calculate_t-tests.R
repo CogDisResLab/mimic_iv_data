@@ -50,6 +50,7 @@ calculate_statistics <- function(disease) {
     unnest_wider(glanced) |>
     mutate(across(where(is.numeric), ~ round(.x, 5)),
            significant = p.value <= 0.05) |>
+    arrange(gender, label) |>
     write_csv(str_glue("results/compared_lab_values_{disease}.csv"))
 
 
@@ -84,6 +85,7 @@ calculate_statistics <- function(disease) {
     unnest_wider(glanced) |>
     mutate(across(where(is.numeric), ~ round(.x, 5)),
            significant = p.value <= 0.05) |>
+    arrange(label) |>
     write_csv(str_glue("results/compared_lab_values_overall_{disease}.csv"))
 
 }
