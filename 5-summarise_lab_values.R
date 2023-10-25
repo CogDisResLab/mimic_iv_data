@@ -20,6 +20,7 @@ summarise_values <- function(disease) {
               median_value = median(valuenum, na.rm = TRUE),
               count_value = n(),
               .groups = "drop") |>
+    arrange(label) |>
     write_csv(str_glue("results/summarised_lab_values_overall_{disease}.csv"))
 
   summarised_by_gender <- labvalues |>
@@ -31,6 +32,7 @@ summarise_values <- function(disease) {
               median_value = median(valuenum, na.rm = TRUE),
               count_value = n(),
               .groups = "drop") |>
+    arrange(gender, label) |>
     write_csv(str_glue("results/summarised_lab_values_{disease}.csv"))
 }
 
