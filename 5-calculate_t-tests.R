@@ -44,7 +44,13 @@ calculate_statistics <- function(disease) {
       nmatched = map_int(
         data,
         ~ count_patients(.x, 0)
-      )
+      ),
+      ntotal = map_int(
+        data,
+        ~ count_patients(.x, 1) + count_patients(.x, 0)
+      ),
+      prop_cases = round(ncases / ntotal, 4),
+      prop_matched = round(nmatched / ntotal, 4)
     ) |>
     select(-data, -t_test, -cohens_d, -successful) |>
     unnest_wider(glanced) |>
@@ -79,7 +85,13 @@ calculate_statistics <- function(disease) {
       nmatched = map_dbl(
         data,
         ~ count_patients(.x, 0)
-      )
+      ),
+      ntotal = map_int(
+        data,
+        ~ count_patients(.x, 1) + count_patients(.x, 0)
+      ),
+      prop_cases = round(ncases / ntotal, 4),
+      prop_matched = round(nmatched / ntotal, 4)
     ) |>
     select(-data, -t_test, -cohens_d, -successful) |>
     unnest_wider(glanced) |>

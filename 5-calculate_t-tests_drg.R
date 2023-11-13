@@ -44,7 +44,13 @@ calculate_statistics <- function(disease) {
       nmatched = map_int(
         data,
         ~ count_patients(.x, 0)
-      )
+      ),
+      ntotal = map_int(
+        data,
+        ~ count_patients(.x, 1) + count_patients(.x, 0)
+      ),
+      prop_cases = round(ncases / ntotal, 4),
+      prop_matched = round(nmatched / ntotal, 4)
     ) |>
     select(-data, -t_test, -cohens_d, -successful) |>
     unnest_wider(glanced) |>
@@ -79,7 +85,13 @@ calculate_statistics <- function(disease) {
       nmatched = map_dbl(
         data,
         ~ count_patients(.x, 0)
-      )
+      ),
+      ntotal = map_int(
+        data,
+        ~ count_patients(.x, 1) + count_patients(.x, 0)
+      ),
+      prop_cases = round(ncases / ntotal, 4),
+      prop_matched = round(nmatched / ntotal, 4)
     ) |>
     select(-data, -t_test, -cohens_d, -successful) |>
     unnest_wider(glanced) |>
@@ -87,7 +99,6 @@ calculate_statistics <- function(disease) {
            significant = p.value <= 0.05) |>
     arrange(label) |>
     write_csv(str_glue("results/compared_lab_values_overall_{disease}_drg.csv"))
-
 }
 
 diseases <- list.files("ancillary/icd_codes/") |>
