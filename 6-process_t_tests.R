@@ -16,7 +16,7 @@ summary_data <- read_csv(summary_file) |>
 
 significant_t_tests <- t_test_results |>
     filter(significant) |>
-    select(gender, label, cluster, estimate, p.value) |>
+    select(gender, label, cluster, estimate, p.value, prop_cases, prop_matched) |>
     arrange(p.value) |>
     mutate(
     label = fct_reorder(label, p.value),
