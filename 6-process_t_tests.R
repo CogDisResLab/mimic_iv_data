@@ -33,19 +33,20 @@ significant_t_tests <- t_test_results |>
 
 significant_effect_sizes <- t_test_results |>
     filter(significant) |>
-    select(gender, label, effect_size, cluster, p.value) |>
+    select(gender, label, effect_size, cluster, p.value, prop_cases, prop_matched) |>
     arrange(p.value) |>
     mutate(
     label = fct_reorder(label, p.value),
     label = fct_rev(label)
   ) |>
+  left_join(summary_data, by = c("label", "cluster", "gender"), relationship = "many-to-many") |>
   write_csv(str_glue("results/compared_lab_values_{disease}_drg_significant_effectsize.csv")) |>
   select(gender, label, effect_size, cluster) |>
-  pivot_wider(names_from = gender, values_from = effect_size) |>
+  unique() |>
+  pivot_wider(names_from = gender, values_from = effect_size, values_fill = 0) |>
   filter(!is.na(`F`), !is.na(`M`)) |>
   rename(Female = `F`, Male = `M`) |>
-  mutate(Same_Direction = sign(Female) == sign(Male)) |>
-  left_join(summary_data, by = c("label", "cluster")) |>
+  mutate(Same_Direction = sign(Female) == sign(Male)) |>  
   write_csv(str_glue("results/compared_lab_values_{disease}_drg_significant_same_direction_effectsize.csv"))
 }
 
@@ -54,4 +55,3 @@ diseases <- list.files("ancillary/icd_codes/") |>
   keep(~ str_detect(.x, c("diabetes"), negate = TRUE))
 
 walk(diseases, process_t_test_results)
-#
