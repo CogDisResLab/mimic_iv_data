@@ -6,3 +6,9 @@
 
 # Exclude temporary files from MS Word, Excel, PowerPoint
 ~$*
+
+# Ignore generated images and docs
+*.png
+*.pdf
+*.jpg
+*.docx
